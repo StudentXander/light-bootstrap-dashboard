@@ -76,11 +76,11 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="./img/cs.jpg">
+        <div class="sidebar" data-image="vr.jpg">
             <div class="sidebar-wrapper">
                 <div class="logo text-center">
-                    <a class="navbar-brand" href="https://github.com/CedrickChu">
-                    <img src="./img/chu.png" alt="My Logo" width="80" height="80">
+                    <img src="download.png" alt="My Logo" width="80" height="80"><br>
+                    <h3 style="color: whitesmoke; font-weight: bolder;">XANDER</h3>
                 </div>
                 <ul class="nav">
                     <li>
