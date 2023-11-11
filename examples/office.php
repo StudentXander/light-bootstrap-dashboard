@@ -79,7 +79,7 @@
         <div class="sidebar" data-image="vr.jpg">
             <div class="sidebar-wrapper">
                 <div class="logo text-center">
-                <img src="download.png" alt="My Logo" width="80" height="80"><br>
+                <img src="download.png" alt="My Logo" width="60" height="60"><br>
                 <h3 style="color: whitesmoke; font-weight: bolder;">XANDER</h3>
 
                 </div>
