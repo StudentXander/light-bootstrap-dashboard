@@ -52,6 +52,9 @@ if (isset($_POST['submit'])) {
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
     <style>
+        body, h2, label, input, select, button {
+            font-family: 'Verdana', sans-serif;
+        }
         .form-group {
             margin-bottom: 15px;
         }
@@ -116,7 +119,7 @@ if (isset($_POST['submit'])) {
             <div class="sidebar-wrapper">
                 <div class="logo text-center">
                     <a class="navbar-brand" href="https://github.com/CedrickChu">
-                    <img src="./img/chu.png" alt="My Logo" width="80" height="80">
+                    <img src="download.png" alt="My Logo" width="60" height="60">
                 </div>
                 <ul class="nav">
                     <li>
@@ -201,9 +204,9 @@ if (isset($_POST['submit'])) {
                             <label for="name">Office:</label>
                             <select id="name" name="name" required>
                                 <?php
-                                include "db_conn.php";
+                                include "db_connection.php";
 
-                                $sql = "SELECT id, name FROM recordapp_db.office";
+                                $sql = "SELECT id, name FROM recordsapp_db.office";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -227,7 +230,7 @@ if (isset($_POST['submit'])) {
                     <div class="container-fluid">
                         <nav>
                             
-                            <p class="copyright text-center">
+                            <p class="copyright text-center"><br><br><br>
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear())

@@ -32,43 +32,46 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
     <style>
+        body, h2, label, input, select, button {
+            font-family: 'Verdana', sans-serif;
+        }
         .nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-  }
-  
-  .nav li {
-    margin-right: 20px;
-  }
-  
-  .nav-link {
-    text-decoration: none;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .nav-link svg {
-    width: 40px;
-    height: 40px;
-    margin-bottom: -10px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        
+        .nav li {
+            margin-right: 20px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .nav-link svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: -10px;
 
-  }
-  
-  .nav-link p {
-    margin: 0;
-  }
-  
-  .nav-item.active-pro {
-    margin-top: 20px;
-  }
-  
-  .nav-link.active {
-    color: #007bff;
-  }
+        }
+        
+        .nav-link p {
+            margin: 0;
+        }
+        
+        .nav-item.active-pro {
+            margin-top: 20px;
+        }
+        
+        .nav-link.active {
+            color: #007bff;
+        }
 
 
     </style>
