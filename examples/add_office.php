@@ -16,14 +16,14 @@
 include "db_connection.php";
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
-    $contactno = $_POST['contactno'];
+    $contactnum = $_POST['contactnum'];
     $email = $_POST['email'];
     $address = $_POST['address'];
     $city = $_POST['city'];
     $postal = $_POST['postal'];
 
     $sql = "INSERT INTO office(name, contactnum, email, address, city, postal)
-            VALUES ('$name', '$contactno', '$email', '$address', '$city', '$postal')";
+            VALUES ('$name', '$contactnum', '$email', '$address', '$city', '$postal')";
 
     if (mysqli_query($conn, $sql)) {
         header("Location: office.php");
