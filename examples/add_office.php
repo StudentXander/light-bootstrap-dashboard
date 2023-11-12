@@ -15,15 +15,18 @@
  <?php
 include "db_connection.php";
 if (isset($_POST['submit'])) {
-    $lastname = $_POST['lastname'];
-    $firstname = $_POST['firstname'];
+    $name = $_POST['name'];
+    $contactno = $_POST['contactno'];
+    $email = $_POST['email'];
     $address = $_POST['address'];
-    $office = $_POST['name'];
-    $sql = "INSERT INTO employee(lastname, firstname, address, office_id)
-            VALUES ('$lastname', '$firstname', '$address', '$office')";
+    $city = $_POST['city'];
+    $postal = $_POST['postal'];
+
+    $sql = "INSERT INTO office(name, contactnum, email, address, city, postal)
+            VALUES ('$name', '$contactno', '$email', '$address', '$city', '$postal')";
 
     if (mysqli_query($conn, $sql)) {
-        header("Location: employee.php");
+        header("Location: office.php");
         exit();
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -52,7 +55,7 @@ if (isset($_POST['submit'])) {
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
     <style>
-        body, h2, label, input, select, button {
+         body, h2, label, input, select, button {
             font-family: 'Verdana', sans-serif;
         }
         .form-group {
@@ -194,18 +197,24 @@ if (isset($_POST['submit'])) {
                     </div>
                 </div>
             </nav>
+            <!-- End Navbar -->
             <div class="content">
                 <div class="container-fluid">
-                    <h2>Add New Employee Form</h2>
+                <h2>Add New Office Form</h2>
                     <form action="" method="post">
                         <div class="form-group">
-                            <label for="lastname">Lastname:</label>
-                            <input type="text" id="lastname" name="lastname" required>
+                            <label for="name">Office Name:</label>
+                            <input type="text" id="name" name="name" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="firstname">Firstname:</label>
-                            <input type="text" id="firstname" name="firstname" required>
+                            <label for="contactno">Contact Number:</label>
+                            <input type="text" id="contactno" name="contactno" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" id="email" name="email" required>
                         </div>
 
                         <div class="form-group">
@@ -214,36 +223,23 @@ if (isset($_POST['submit'])) {
                         </div>
 
                         <div class="form-group">
-                            <label for="name">Office:</label>
-                            <select id="name" name="name" required>
-                                <?php
-                                include "db_connection.php";
+                            <label for="city">City:</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
 
-                                $sql = "SELECT id, name FROM recordsapp_db.office";
-                                $result = $conn->query($sql);
-
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
-                                    }
-                                } else {
-                                    echo "<option value='' disabled>No offices found</option>";
-                                }
-
-                                $conn->close();
-                                ?>
-                            </select>
+                        <div class="form-group">
+                            <label for="postal">Postal:</label>
+                            <input type="text" id="postal" name="postal" required>
                         </div>
 
                         <button class="button-button" type="submit" name="submit">Submit</button>
                     </form>
                 </div>
-
                 <footer class="footer">
                     <div class="container-fluid">
                         <nav>
                             
-                            <p class="copyright text-center"><br><br><br>
+                            <p class="copyright text-center">
                                 ©
                                 <script>
                                     document.write(new Date().getFullYear())
