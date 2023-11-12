@@ -12,12 +12,32 @@
 =========================================================
 
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
+ <?php
+include "db_connection.php";
+if (isset($_POST['submit'])) {
+    $lastname = $_POST['lastname'];
+    $firstname = $_POST['firstname'];
+    $address = $_POST['address'];
+    $office = $_POST['name'];
+    $sql = "INSERT INTO employee(lastname, firstname, address, office_id)
+            VALUES ('$lastname', '$firstname', '$address', '$office')";
+
+    if (mysqli_query($conn, $sql)) {
+        header("Location: employee.php");
+        exit();
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    mysqli_close($conn);
+}
+?>
  <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/form.css">
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,55 +52,71 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
     <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            width: 100px; /* Set a fixed width for the label */
+        }
+
+        input {
+            width: 50%;
+            margin: auto;
+            padding: 8px;
+            box-sizing: border-box;
+        }
         .nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-  }
-  
-  .nav li {
-    margin-right: 20px;
-  }
-  
-  .nav-link {
-    text-decoration: none;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .nav-link svg {
-    width: 40px;
-    height: 40px;
-    margin-bottom: -10px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        
+        .nav li {
+            margin-right: 20px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .nav-link svg {
+            width: 40px;
+            height: 40px;
+            margin-bottom: -10px;
 
-  }
-  
-  .nav-link p {
-    margin: 0;
-  }
-  
-  .nav-item.active-pro {
-    margin-top: 20px;
-  }
-  
-  .nav-link.active {
-    color: #007bff;
-  }
-
+        }
+        
+        .nav-link p {
+            margin: 0;
+        }
+        
+        .nav-item.active-pro {
+            margin-top: 20px;
+        }
+        
+        .nav-link.active {
+            color: #007bff;
+        }
 
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-image="vr.jpg">
+        <div class="sidebar" data-image="./img/cs.jpg">
             <div class="sidebar-wrapper">
                 <div class="logo text-center">
-                    <img src="download.png" alt="My Logo" width="60" height="60"><br>
-                    <h3 style="color: whitesmoke; font-weight: bolder;">XANDER</h3>
+                    <a class="navbar-brand" href="https://github.com/CedrickChu">
+                    <img src="./img/chu.png" alt="My Logo" width="80" height="80">
                 </div>
                 <ul class="nav">
                     <li>
@@ -129,7 +165,7 @@
         </div>
         <div class="main-panel">
             <!-- Navbar -->
-            <nav  class="navbar navbar-expand-lg " color-on-scroll="500">
+            <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="nav navbar-nav mr-auto">
@@ -142,79 +178,66 @@
                     </div>
                 </div>
             </nav>
-            <!-- End Navbar --> 
             <div class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card strpied-tabled-with-hover">
-                                <div class="card-header ">
-                                    <div class="row">
-                                        <div class="col ">
-                                            <h4 class="card-title"><strong>Employee</strong></h4>
-                                        </div>
-                                        <div class="col text-right">
-                                            <a href='add_employee.php'>
-                                                <button type="button" class="btn btn-info btn-fill">Add New Employee</button>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <p class="card-category">A DATA of employees.</p>
-                                </div>
-                                <?php
-                                include "db_connection.php";
-                                $sql = "SELECT
-                                            e.lastname,
-                                            e.firstname,
-                                            e.address,
-                                            o.name as office
-                                        FROM recordsapp_db.employee e
-                                        INNER JOIN recordsapp_db.office o ON e.office_id = o.id";
+                    <h2>Add New Employee Form</h2>
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label for="lastname">Lastname:</label>
+                            <input type="text" id="lastname" name="lastname" required>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="firstname">Firstname:</label>
+                            <input type="text" id="firstname" name="firstname" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Office:</label>
+                            <select id="name" name="name" required>
+                                <?php
+                                include "db_conn.php";
+
+                                $sql = "SELECT id, name FROM recordapp_db.office";
                                 $result = $conn->query($sql);
 
-                                echo "<div class='card-body table-full-width table-responsive'>";
-                                echo "<table class='table table-hover table-striped'>";
-                                echo "<th>LAST NAME</th>";
-                                echo "<th>FIRST NAME</th>";
-                                echo "<th>ADDRESS</th>";
-                                echo "<th>OFFICE</th>";
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td>" . $row['lastname'] . "</td>";
-                                        echo "<td>" . $row['firstname'] . "</td>";
-                                        echo "<td>" . $row['address'] . "</td>";
-                                        echo "<td>" . $row['office'] . "</td>";
-                                        echo "</tr>";
+                                        echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
                                     }
-
-                                    echo "</table>";
                                 } else {
-                                    echo "0 results";
+                                    echo "<option value='' disabled>No offices found</option>";
                                 }
 
                                 $conn->close();
                                 ?>
-
-                            </div>
+                            </select>
                         </div>
+
+                        <button class="button-button" type="submit" name="submit">Submit</button>
+                    </form>
+                </div>
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav>
+                            
+                            <p class="copyright text-center">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                            </p>
+                        </nav>
                     </div>
-                </div>
+                </footer>
             </div>
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav>
-                        <p class="copyright text-center">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>
-                            <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                        </p>
-                    </nav>
-                </div>
-            </footer>
         </div>
     </div>
     <!--   -->
